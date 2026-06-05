@@ -1,0 +1,40 @@
+# ============================================================
+# .htaccess — Apache URL Routing + Security Rules
+# WHY: Clean URLs, block direct access to sensitive dirs
+# ============================================================
+
+# Enable URL Rewriting Engine
+RewriteEngine On
+
+# ── Security: Block direct access to PHP includes ────────────
+# Nobody should be able to open /includes/db.php in browser
+<IfModule mod_rewrite.c>
+    RewriteRule ^includes/ - [F,L]
+    RewriteRule ^uploads/.*\.php$ - [F,L]
+</IfModule>
+
+# ── Security: Block sensitive file extensions ─────────────────
+<FilesMatch "\.(sql|log|env|htpasswd)$">
+    Order Allow,Deny
+    Deny from all
+</FilesMatch>
+
+# ── Security: Remove PHP version disclosure ───────────────────
+<IfModule mod_headers.c>
+    Header unset X-Powered-By
+</IfModule>
+
+# ── Performance: Browser Caching for static assets ────────────
+<IfModule mod_expires.c>
+    ExpiresActive On
+    ExpiresByType text/css              "access plus 1 month"
+    ExpiresByType application/javascript "access plus 1 month"
+    ExpiresByType image/jpeg            "access plus 3 months"
+    ExpiresByType image/png             "access plus 3 months"
+    ExpiresByType image/webp            "access plus 3 months"
+</IfModule>
+
+# ── Redirect /admin to /admin/dashboard if logged in ──────────
+# (handled by PHP session checks in each file)
+
+Options -Indexes
