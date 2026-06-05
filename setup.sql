@@ -3,9 +3,6 @@
 --  Usage: mysql -u root -p < setup.sql
 -- ============================================================
 
-CREATE DATABASE IF NOT EXISTS bg_website CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
-USE bg_website;
-
 -- ── ADMIN USERS ──────────────────────────────────────────────
 -- Stores admin login credentials
 -- password_hash() is used in PHP so plain text is NEVER stored
