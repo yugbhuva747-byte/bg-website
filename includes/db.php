@@ -11,7 +11,19 @@ define('DB_PASS', '');           // change for production
 define('DB_NAME', 'bg_website');
 
 // mysqli_connect() — procedural style, simple & lightweight
-$conn = mysqli_connect(DB_HOST, DB_USER, DB_PASS, DB_NAME);
+<?php
+$host = getenv('DB_HOST') ?: 'localhost';
+$user = getenv('DB_USER') ?: 'root';
+$pass = getenv('DB_PASS') ?: '';
+$db   = getenv('DB_NAME') ?: 'bg_website';
+$port = (int)(getenv('DB_PORT') ?: 3306);
+
+$conn = mysqli_connect($host, $user, $pass, $db, $port);
+
+if (!$conn) {
+    die("Connection failed: " . mysqli_connect_error());
+}
+?>
 
 // If connection fails, stop everything & show a safe message
 if (!$conn) {

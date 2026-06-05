@@ -7,6 +7,6 @@ WORKDIR /app
 
 COPY . .
 
-EXPOSE 10000
+EXPOSE $PORT
 
-CMD ["php", "-S", "0.0.0.0:10000"]
+CMD ["sh", "-c", "php -S 0.0.0.0:${PORT:-10000}"]
