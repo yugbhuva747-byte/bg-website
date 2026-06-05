@@ -12,11 +12,11 @@ define('DB_NAME', 'bg_website');
 
 // mysqli_connect() — procedural style, simple & lightweight
 <?php
-$host = getenv('DB_HOST') ?: 'localhost';
-$user = getenv('DB_USER') ?: 'root';
-$pass = getenv('DB_PASS') ?: '';
-$db   = getenv('DB_NAME') ?: 'bg_website';
-$port = (int)(getenv('DB_PORT') ?: 3306);
+$host = "sql206.infinityfree.com";
+$user = "if0_42101782";
+$pass = "YOUR_CPANEL_PASSWORD";  // jo password thi login karyo
+$db   = "if0_42101782_bg_website";
+$port = 3306;
 
 $conn = mysqli_connect($host, $user, $pass, $db, $port);
 
